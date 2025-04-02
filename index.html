@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my personal website</title>
+    <style>
+        :root {
+            --color-primary: #2e7d32;
+            --color-secondary: #ff7043;
+            --color-tertiary: #9575cd;
+            --color-quaternary: #26a69a;
+            --color-background: #f9f9f9;
+            --color-text: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+        
+        header {
+            background-image: url('question.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(35, 68, 37, 0.7); /* Semi-transparent overlay using primary color */
+            z-index: 1;
+        }
+        
+        .profile-container {
+            position: relative;
+            z-index: 2; /* Place content above the overlay */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add shadow for better readability */
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: white;
+            font-weight: 300;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Add shadow for better readability */
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+        }
+        
+        #publications h2::after {
+            background-color: var(--color-primary);
+        }
+        
+        #experience h2::after {
+            background-color: var(--color-secondary);
+        }
+        
+        #education h2::after {
+            background-color: var(--color-tertiary);
+        }
+        
+        #projects h2::after {
+            background-color: var(--color-quaternary);
+        }
+        
+        .card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card h4 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .card .period {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .card p {
+            margin-bottom: 0.8rem;
+        }
+        
+        .card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .publication-tag {
+            background-color: rgba(255, 82, 82, 0.15);
+            color: var(--color-primary);
+        }
+        
+        .experience-tag {
+            background-color: rgba(255, 177, 66, 0.15);
+            color: var(--color-secondary);
+        }
+        
+        .education-tag {
+            background-color: rgba(46, 213, 115, 0.15);
+            color: var(--color-tertiary);
+        }
+        
+        .project-tag {
+            background-color: rgba(30, 144, 255, 0.15);
+            color: var(--color-quaternary);
+        }
+        
+        footer {
+            background-color: var(--color-text);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--color-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="profile-container">
+            <img class="profile-pic" src="pic.jpeg" alt="profile photo">
+            <h1>camilo zapata</h1>
+            <p class="tagline">vision AI @LandingAI // building gyms for AI models</p>
+        </div>
+    </header>
+    
+    <main>    
+        <section id="experience">
+            <h2>work experience</h2>
+            
+            <div class="card">
+                <h3>senior engineering manager - ML systems</h3>
+                <h4>LandingAI</h4>
+                <div class="period">nov 2024 - present</div>
+                <p>Lead the development of the ML infrastructure for the <a href="https://va.landing.ai/agent">VisionAgent</a> and <a href="https://va.landing.ai/">VisualAI</a> platforms at LandingAI.</p>
+                <div class="tags">
+                    <span class="tag experience-tag">llms</span>
+                    <span class="tag experience-tag">agents</span>
+                    <span class="tag experience-tag">vision</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>engineering manager - ML systems</h3>
+                <h4>LandingAI</h4>
+                <div class="period">jan 2021 - nov 2024</div>
+                <p>Lead the development of the ML infrastructure for training and inference for the <a href="https://app.landing.ai/">LandingLens</a> product.</p>
+                <div class="tags">
+                    <span class="tag experience-tag">vision</span>
+                    <span class="tag experience-tag">inference</span>
+                    <span class="tag experience-tag">training</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>machine learning engineer</h3>
+                <h4>LandingAI</h4>
+                <div class="period">sep 2018 - jan 2021</div>
+                <p>Developed internal tooling and vision solutions for visual inspection tasks for customers.</p>
+                <div class="tags">
+                    <span class="tag experience-tag">skill 1</span>
+                    <span class="tag experience-tag">skill 2</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>machine learning engineer</h3>
+                <h4>Whale & Jaguar</h4>
+                <div class="period">aug 2017 - aug 2018</div>
+                <p>I was one of two ML engineers who worked directly with the founders to develop projects that used NLP techniques and deep learning models to analyze digital communications on social media and digital strategy for important personalities in Colombia.</p>
+                <div class="tags">
+                    <span class="tag experience-tag">skill 1</span>
+                    <span class="tag experience-tag">skill 2</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education">
+            <h2>education</h2>
+            
+            <div class="card">
+                <h3>master's degree in physics</h3>
+                <h4>ETH Zürich</h4>
+                <div class="period">2015 - 2017</div>
+                <p>Did a semester project and master's thesis on quantum computing simulations. Also took a semester of machine learning.</p>
+                <div class="tags">
+                    <span class="tag education-tag">quantum cmputing</span>
+                    <span class="tag education-tag">quantum information theory</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>professional studies in iOS app development</h3>
+                <h4>NYU</h4>
+                <div class="period">2014</div>
+                <p>Studied iOS app development. After the course ended, i worked for a couple of months to develop and publish the <a href="https://x.com/Picsaic">Picsaic</a> iOS app (no longer available in the app store).</p>
+                <div class="tags">
+                    <span class="tag education-tag">iOS</span>
+                    <span class="tag education-tag">objective C</span>
+                    <span class="tag education-tag">swift</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>bachelor's degree in physics</h3>
+                <h4>Universidad de los Andes</h4>
+                <div class="period">2009 - 2013</div>
+                <p>Did my bachelor's thesis on quantum information theory and later published an <a href="https://iopscience.iop.org/article/10.1088/1751-8121/50/2/025301/meta">article on statistical quantum mechanics</a> with my professor and another student.</p>
+                <div class="tags">
+                    <span class="tag education-tag">quantum information theory</span>
+                    <span class="tag education-tag">theoretical physics</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>projects</h2>
+            
+            <div class="card">
+                <h3><a href="https://x.com/Picsaic">Picsaic</a></h3>
+                <div class="period">2014</div>
+                <p>Developed, designed and published an iOS app to create picture collages that form another bigger picture. Got a few thousand of downloads.</p>
+                <div class="tags">
+                    <span class="tag project-tag">iOS</span>
+                    <span class="tag project-tag">images</span>
+                    <span class="tag project-tag">design</span>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="publications">
+            <h2>publications</h2>
+            
+            <div class="card">
+                <h3><a href="https://iopscience.iop.org/article/10.1088/1751-8121/50/2/025301/meta">The difference between two random mixed quantum states: exact and asymptotic spectral analysis</a></h3>
+                <h4>Journal of Physics A: Mathematical and Theoretical</h4>
+                <div class="period">published dec 2016</div>
+                <div class="tags">
+                    <span class="tag publication-tag">statistical quantum mechanics</span>
+                    <span class="tag publication-tag">random matrices</span>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2025 camilo zapata. all rights reserved.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
